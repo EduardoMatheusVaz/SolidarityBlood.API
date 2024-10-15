@@ -9,7 +9,7 @@ namespace SolidarityBlood.Application.DTOs.Donors
 {
     public class CreateDonorDTO : BaseEntity
     {
-        public CreateDonorDTO(string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor)
+        public CreateDonorDTO(string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor, int addressId)
         {
             FullName = fullName;
             Email = email;
@@ -18,6 +18,7 @@ namespace SolidarityBlood.Application.DTOs.Donors
             Weight = weight;
             BloodTypes = bloodTypes;
             RHFactor = rHFactor;
+            AddressId = addressId;
         }
 
         public string FullName { get; set; }
@@ -27,5 +28,6 @@ namespace SolidarityBlood.Application.DTOs.Donors
         public double Weight { get; set; }
         public string BloodTypes { get; set; }
         public string RHFactor { get; set; }
+        public int AddressId{ get; set; }
     }
 }

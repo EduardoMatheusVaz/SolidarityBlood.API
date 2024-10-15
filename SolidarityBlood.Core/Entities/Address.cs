@@ -25,7 +25,7 @@ namespace SolidarityBlood.Core.Entities
 
 
         //PROPRIEDADE DE NAVEGAÇÃO
-        public List<Donor>? Donors { get; private set; }
+        public ICollection<Donor>? Donors { get; private set; }
 
         public void Update(string publicPlace, string city, string state, string zipCode)
         {

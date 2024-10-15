@@ -1,13 +1,13 @@
-﻿using SolidarityBlood.Core.Entities;
+﻿using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SolidarityBlood.Application.DTOs.Donors
+namespace SolidarityBlood.Application.Commands.Donors
 {
-    public class UpdateDonorDTO : BaseEntity
+    public class CreateDonorCommand : IRequest<int>
     {
         public string FullName { get; set; }
         public string Email { get; set; }

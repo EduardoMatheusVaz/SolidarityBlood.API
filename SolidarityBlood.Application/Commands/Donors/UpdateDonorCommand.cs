@@ -1,15 +1,15 @@
-﻿using SolidarityBlood.Core.Entities;
+﻿using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SolidarityBlood.Application.DTOs.Donors
+namespace SolidarityBlood.Application.Commands.Donors
 {
-   public class GetAllDonorsDTO : BaseEntity
+    public class UpdateDonorCommand : IRequest<Unit>
     {
-        public GetAllDonorsDTO(int id, string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor, int addressId)
+        public UpdateDonorCommand(int id, string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor, int addressId)
         {
             Id = id;
             FullName = fullName;
@@ -19,10 +19,10 @@ namespace SolidarityBlood.Application.DTOs.Donors
             Weight = weight;
             BloodTypes = bloodTypes;
             RHFactor = rHFactor;
-            AddressId = addressId; 
+            AddressId = addressId;
         }
 
-        public int Id { get; set; }
+        public int Id{ get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
         public DateTime DateBirth { get; set; }
@@ -30,6 +30,6 @@ namespace SolidarityBlood.Application.DTOs.Donors
         public double Weight { get; set; }
         public string BloodTypes { get; set; }
         public string RHFactor { get; set; }
-        public int AddressId{ get; set; }
+        public int AddressId { get; set; }
     }
 }

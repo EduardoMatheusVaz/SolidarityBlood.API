@@ -23,7 +23,7 @@ namespace SolidarityBlood.Application.Services.Implementations
         {
             var newDonation = new Donation(donation.DonorId, donation.DateDonation, donation.QuantityMl);
 
-            _dbcontext.Donations.Add(newDonation);
+            _dbcontext.Donation.Add(newDonation);
             _dbcontext.SaveChanges();
 
             return donation.Id;
@@ -31,15 +31,15 @@ namespace SolidarityBlood.Application.Services.Implementations
 
         public void Delete(int id)
         {
-            var donation = _dbcontext.Donations.SingleOrDefault(d => d.Id == id);
+            var donation = _dbcontext.Donation.SingleOrDefault(d => d.Id == id);
 
-            _dbcontext.Donations.Remove(donation);
+            _dbcontext.Donation.Remove(donation);
             _dbcontext.SaveChanges();
         }
 
         public List<GetAllDonationDTO> GetAllDonations()
         {
-            var donations = _dbcontext.Donations.Select(gad => new GetAllDonationDTO(
+            var donations = _dbcontext.Donation.Select(gad => new GetAllDonationDTO(
                 gad.Id,
                 gad.DonorId,
                 gad.DateDonation,
@@ -51,7 +51,7 @@ namespace SolidarityBlood.Application.Services.Implementations
 
         public GetByIdDonationDTO GetById(int id)
         {
-            var donation = _dbcontext.Donations.SingleOrDefault(d => d.Id == id);
+            var donation = _dbcontext.Donation.SingleOrDefault(d => d.Id == id);
 
             var newDonation = new GetByIdDonationDTO(donation.Id, donation.DonorId, donation.DateDonation, donation.QuantityMl);
 
@@ -61,7 +61,7 @@ namespace SolidarityBlood.Application.Services.Implementations
 
         public void Update(int id, UpdateDonationDTO donation)
         {
-            var newDonor = _dbcontext.Donations.SingleOrDefault(d => d.Id == id);
+            var newDonor = _dbcontext.Donation.SingleOrDefault(d => d.Id == id);
 
             newDonor.Update(donation.DonorId, donation.DateDonation, donation.QuantityMl);
             _dbcontext.SaveChanges();

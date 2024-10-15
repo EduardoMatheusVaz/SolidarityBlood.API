@@ -15,8 +15,8 @@ namespace SolidarityBlood.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Address> builder)
         {
             builder
-            .ToTable("tb_Address")
-            .HasKey(a => a.Id);
+                .ToTable("tb_Address")
+                .HasKey(a => a.Id);
 
             builder
                 .HasMany(d => d.Donors)

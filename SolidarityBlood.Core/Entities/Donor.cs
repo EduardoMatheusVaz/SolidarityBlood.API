@@ -10,7 +10,7 @@ namespace SolidarityBlood.Core.Entities
 {
     public class Donor : BaseEntity
     {
-        public Donor(string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor)
+        public Donor(string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor, int addressId)
         {
             FullName = fullName;
             Email = email;
@@ -19,6 +19,7 @@ namespace SolidarityBlood.Core.Entities
             Weight = weight;
             BloodTypes = bloodTypes;
             RHFactor = rHFactor;
+            AddressId = addressId;
         }
 
         public string FullName { get; private set; }
@@ -37,7 +38,7 @@ namespace SolidarityBlood.Core.Entities
         public Address? Address { get; private set; }
 
 
-       public void Update(string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor)
+       public void Update(string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor, int addressId)
         {
             FullName = fullName;
             Email = email;
@@ -46,6 +47,7 @@ namespace SolidarityBlood.Core.Entities
             Weight = weight;
             BloodTypes = bloodTypes;
             RHFactor = rHFactor;
+            AddressId = addressId;
         }
 
     }   

@@ -24,7 +24,7 @@ namespace SolidarityBlood.Application.Services.Implementations
         {
             var newAddress = new Address(address.PublicPlace, address.City, address.State, address.ZipCode);
 
-            _dbcontext.Addresses.Add(newAddress);
+            _dbcontext.Address.Add(newAddress);
             _dbcontext.SaveChanges();
 
             return newAddress.Id;
@@ -32,15 +32,15 @@ namespace SolidarityBlood.Application.Services.Implementations
 
         public void Delete(int id)
         {
-            var address = _dbcontext.Addresses.FirstOrDefault(a => a.Id == id);
+            var address = _dbcontext.Address.FirstOrDefault(a => a.Id == id);
 
-            _dbcontext.Addresses.Remove(address);
+            _dbcontext.Address.Remove(address);
             _dbcontext.SaveChanges();
         }
 
         public List<GetAllAddressDTO> GetAll()
         {
-            var addresses = _dbcontext.Addresses.Select(a => new GetAllAddressDTO(
+            var addresses = _dbcontext.Address.Select(a => new GetAllAddressDTO(
                 a.Id,
                 a.PublicPlace,
                 a.City,
@@ -53,7 +53,7 @@ namespace SolidarityBlood.Application.Services.Implementations
 
         public GetByIdAddressDTO GetById(int id)
         {
-            var address = _dbcontext.Addresses.FirstOrDefault(a => a.Id == id);
+            var address = _dbcontext.Address.FirstOrDefault(a => a.Id == id);
 
             var newAddress = new GetByIdAddressDTO(address.Id, address.PublicPlace, address.City, address.State, address.ZipCode);
 
@@ -62,7 +62,7 @@ namespace SolidarityBlood.Application.Services.Implementations
 
         public void Update(int id, UpdateAddressDTO address)
         {
-            var addressss = _dbcontext.Addresses.FirstOrDefault(a => a.Id == id);
+            var addressss = _dbcontext.Address.FirstOrDefault(a => a.Id == id);
 
             addressss.Update(address.PublicPlace, address.City, address.State, address.ZipCode);
             _dbcontext.SaveChanges();

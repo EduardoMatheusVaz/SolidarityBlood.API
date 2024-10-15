@@ -22,7 +22,7 @@ namespace SolidarityBlood.Core.Entities
         public int DonorId { get; private set; }
 
         // PROPRIEDADE DE NAVEGAÇÃO
-        public Donor Donor { get; private set; }
+        public Donor? Donor { get; private set; }
 
         public void Update(int donorId, DateTime dateDonation, int quantityMl)
         {

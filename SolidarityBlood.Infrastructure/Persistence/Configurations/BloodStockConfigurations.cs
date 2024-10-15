@@ -16,7 +16,7 @@ namespace SolidarityBlood.Infrastructure.Persistence.Configurations
         {
             builder
                 .ToTable("tb_BloodStock")
-                .HasKey(i => i.Id);
+                .HasKey(x => x.Id);
         }
     }
 }

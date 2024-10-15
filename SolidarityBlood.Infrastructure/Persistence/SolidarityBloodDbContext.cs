@@ -11,21 +11,20 @@ namespace SolidarityBlood.Infrastructure.Persistence
 {
     public class SolidarityBloodDbContext : DbContext
     {
-        public SolidarityBloodDbContext(DbContextOptions<SolidarityBloodDbContext> options) : base (options)
+        public SolidarityBloodDbContext(DbContextOptions<SolidarityBloodDbContext> options) : base(options)
         {
 
         }
 
-        public DbSet<Donor> Donors { get; set; }
-        public DbSet<Address> Addresses { get; set; }
-        public DbSet<Donation> Donations { get; set; }
-        public DbSet<BloodStock> BloodStocks { get; set; }
+        public DbSet<Donor> Donor { get; set; }
+        public DbSet<Address> Address { get; set; }
+        public DbSet<Donation> Donation { get; set; }
+        public DbSet<BloodStock> BloodStock { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
+            ModelBuilder modelBuilder1 = modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+ 
         }
     }
 }
