@@ -1,9 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using SolidarityBlood.Application.Commands.Donor;
 using SolidarityBlood.Application.Commands.Donors;
-using SolidarityBlood.Application.Services.Implementations;
-using SolidarityBlood.Application.Services.Interfaces;
+using SolidarityBlood.Core.Repositories;
 using SolidarityBlood.Infrastructure.Persistence;
+using SolidarityBlood.Infrastructure.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,10 +23,10 @@ builder.Services.AddDbContext<SolidarityBloodDbContext>(options =>
 builder.Services.AddMediatR(options => options.RegisterServicesFromAssemblyContaining(typeof(CreateDonorCommand)));
 
 
-builder.Services.AddScoped<IDonorService, DonorService>();
-builder.Services.AddScoped<IDonationService, DonationService>();
-builder.Services.AddScoped<IBloodStockService, BloodStockService>();
-builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IDonorRepository, DonorRepository>();
+builder.Services.AddScoped<IDonationRepository, DonationRepository>();
+builder.Services.AddScoped<IBloodStockRepository, BloodStockRepository>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 
 var app = builder.Build();
 

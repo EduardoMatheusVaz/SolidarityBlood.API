@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using SolidarityBlood.Application.Commands.Addresses;
 using SolidarityBlood.Application.DTOs.Addresses;
-using SolidarityBlood.Application.Services.Implementations;
-using SolidarityBlood.Application.Services.Interfaces;
+using SolidarityBlood.Application.Queries.Address;
 using SolidarityBlood.Core.Entities;
 using SolidarityBlood.Infrastructure.Persistence;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace SolidarityBlood.API.Controllers
 {
@@ -11,26 +13,29 @@ namespace SolidarityBlood.API.Controllers
     [Route("api/addresses")]
     public class AddressesController : ControllerBase
     {
-        private readonly IAddressService _addressService;
+        private readonly IMediator _mediator;
 
-        public AddressesController(IAddressService addressService)
+        public AddressesController(IMediator mediator)
         {
-            _addressService = addressService;
+            _mediator = mediator;
         }
 
         [HttpPost]
-        public IActionResult Create(CreateAddressDTO address)
+        public async Task<IActionResult> Create(CreateAddressCommand command)
         {
-            _addressService.Create(address);
+            var id = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { Id = address.Id }, address);
+            return CreatedAtAction(nameof(GetById), new { Id = id }, command);
         }
 
 
+        //  api/addresses/
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var addresses = _addressService.GetAll();
+            var get = new GetAllAddressQuerie();
+
+            var addresses = await _mediator.Send(get);
 
             return Ok(addresses);
 
@@ -39,9 +44,11 @@ namespace SolidarityBlood.API.Controllers
 
         //  api/addresses/1
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var address = _addressService.GetById(id);
+            var get = new GetByIdAddressQuerie(id);
+            
+            var address = await _mediator.Send(get);
 
             return Ok(address);
         }
@@ -49,10 +56,10 @@ namespace SolidarityBlood.API.Controllers
 
         //  api/addresses/2
         [HttpPut("{id}")]
-        public IActionResult Update(int id, UpdateAddressDTO address)
+        public async Task<IActionResult> Update(int id, UpdateAddressCommand command)
         {
-            _addressService.Update(id, address);
-
+            await _mediator.Send(command);
+            
             return NoContent();
         }
 
@@ -61,8 +68,6 @@ namespace SolidarityBlood.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _addressService.Delete(id);
-
             return NoContent();
         }
     }

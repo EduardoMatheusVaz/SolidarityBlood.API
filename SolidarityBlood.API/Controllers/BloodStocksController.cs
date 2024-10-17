@@ -1,6 +1,8 @@
-﻿  using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using SolidarityBlood.Application.Commands.BloodStocks;
 using SolidarityBlood.Application.DTOs.BloodStocks;
-using SolidarityBlood.Application.Services.Interfaces;
+using SolidarityBlood.Application.Queries.BloodStock;
 using SolidarityBlood.Core.Entities;
 using SolidarityBlood.Infrastructure.Persistence;
 
@@ -10,26 +12,28 @@ namespace SolidarityBlood.API.Controllers
     [Route("api/bloodstocks")]
     public class BloodStocksController : Controller
     {
-        private readonly IBloodStockService _bloodStockService;
+        private readonly IMediator _mediator;
 
-        public BloodStocksController(IBloodStockService bloodStockService)
+        public BloodStocksController(IMediator mediator)
         {
-            _bloodStockService = bloodStockService;
+            _mediator = mediator;
         }
 
         [HttpPost]
-        public IActionResult Create(CreateBloodStockDTO bloodStock)
+        public async Task<IActionResult> Create(CreateBloodStockCommand command)
         {
-            _bloodStockService.Create(bloodStock);
+            var id = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { Id = bloodStock.Id }, bloodStock);
+            return CreatedAtAction(nameof(GetById), new { Id = id }, id);
         }
 
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var stocks = _bloodStockService.GetAll();
+            var stocks = new GetAllBloodStocksQuerie();
+
+            await _mediator.Send(stocks);
 
             return Ok(stocks);
         }
@@ -37,9 +41,11 @@ namespace SolidarityBlood.API.Controllers
 
         //  api/addresses/1
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var stock = _bloodStockService.GetById(id);
+            var stock = new GetByIdBloodStockQuerie(id);
+
+            await _mediator.Send(stock);
 
             return Ok(stock);
         }
@@ -47,9 +53,9 @@ namespace SolidarityBlood.API.Controllers
 
         //  api/addresses/2
         [HttpPut("{id}")]
-        public IActionResult Update(int id, UpdateBloodStockDTO bloodStock)
+        public async Task<IActionResult> Update(int id, UpdateBloodStockDTO bloodStock)
         {
-            _bloodStockService.Update(id, bloodStock);
+            await _mediator.Send(bloodStock);
 
             return NoContent();
         }
@@ -57,10 +63,8 @@ namespace SolidarityBlood.API.Controllers
 
         //  api/addresses/3
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _bloodStockService.Delete(id);
-
             return NoContent();
         }
     }

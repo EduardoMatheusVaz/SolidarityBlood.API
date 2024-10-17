@@ -12,15 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Donations\" />
-    <Folder Include="Commands\Addresses\" />
-    <Folder Include="Commands\BloodStocks\" />
-    <Folder Include="Queries\Address\" />
-    <Folder Include="Queries\BloodStock\" />
-    <Folder Include="Queries\Donation\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MediatR" Version="12.4.1" />
   </ItemGroup>
 

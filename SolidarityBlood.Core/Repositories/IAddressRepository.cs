@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SolidarityBlood.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,12 @@ using System.Threading.Tasks;
 
 namespace SolidarityBlood.Core.Repositories
 {
-    internal class IAddressRepository
+    public interface IAddressRepository
     {
+        Task<int> CreateAddress(Address address);
+        Task<List<Address>> GetAllAddress();
+        Task <Address> GetByIdAddress(int id);
+        Task UpdateAddress(int id, Address address);
+        Task Delete(int id);
     }
 }

@@ -9,9 +9,8 @@ namespace SolidarityBlood.Application.Commands.Donors
 {
     public class UpdateDonorCommand : IRequest<Unit>
     {
-        public UpdateDonorCommand(int id, string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor, int addressId)
+        public UpdateDonorCommand(string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor, int addressId)
         {
-            Id = id;
             FullName = fullName;
             Email = email;
             DateBirth = dateBirth;

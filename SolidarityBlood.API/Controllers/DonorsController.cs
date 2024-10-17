@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using SolidarityBlood.Application.Commands.Donors;
 using SolidarityBlood.Application.DTOs.Donors;
-using SolidarityBlood.Application.Services.Interfaces;
+using SolidarityBlood.Application.Queries.Donor;
 using SolidarityBlood.Core.Entities;
 using SolidarityBlood.Infrastructure.Persistence;
+using System.Net;
 
 namespace SolidarityBlood.API.Controllers
 {
@@ -10,27 +13,28 @@ namespace SolidarityBlood.API.Controllers
     [Route("api/donors")]
     public class DonorsController : ControllerBase
     {   
+        private readonly IMediator _mediator;
 
-        private readonly IDonorService _donorService;
-
-        public DonorsController(IDonorService service)
+        public DonorsController(IMediator mediator)
         {
-            _donorService = service;
+            _mediator = mediator;
         }
 
         [HttpPost]
-        public IActionResult Create(CreateDonorDTO donor)
+        public async Task<IActionResult> Create(CreateDonorCommand command)
         {
-            _donorService.Create(donor);
+            var id = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { id = donor.Id }, donor);
+            return CreatedAtAction(nameof(GetById), new { Id = id }, command);
         }
 
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var donors = _donorService.GetAllDonors();
+            var get = new GetAllDonorsQuerie();
+
+            var donors = await  _mediator.Send(get);
 
             return Ok(donors);
         }
@@ -38,9 +42,11 @@ namespace SolidarityBlood.API.Controllers
 
         //  api/donors/1
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var donor = _donorService.GetById(id);
+            var get = new GetByIdDonorQuerie(id);
+
+            var donor = await _mediator.Send(get);
 
             return Ok(donor);
 
@@ -48,9 +54,9 @@ namespace SolidarityBlood.API.Controllers
 
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, UpdateDonorDTO donor)
+        public async Task<IActionResult> Update(int id, UpdateDonorCommand command)
         {
-            _donorService.Update(id, donor);
+            await _mediator.Send(command);
 
             return NoContent();
         }
@@ -59,8 +65,6 @@ namespace SolidarityBlood.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _donorService.Delete(id);
-
             return NoContent();
         }
     }
