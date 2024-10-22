@@ -1,4 +1,5 @@
 ﻿using SolidarityBlood.Core.Entities;
+using SolidarityBlood.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,6 @@ namespace SolidarityBlood.Application.DTOs.Donors
         public string BloodTypes { get; set; }
         public string RHFactor { get; set; }
         public int AddressId { get; set; }
+        public DonorStatusEnum Status { get; set; }
     }
 }

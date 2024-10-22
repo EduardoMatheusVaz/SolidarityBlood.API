@@ -31,7 +31,8 @@ namespace SolidarityBlood.Application.Queries.Donor
                 l.Weight,
                 l.BloodTypes,
                 l.RHFactor,
-                l.AddressId
+                l.AddressId,
+                l.Status
                 )).ToList();
 
             return newList;

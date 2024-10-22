@@ -50,7 +50,7 @@ namespace SolidarityBlood.API.Controllers
             return Ok(stock);
         }
 
-
+  
         //  api/addresses/2
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, UpdateBloodStockDTO bloodStock)

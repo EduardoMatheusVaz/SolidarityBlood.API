@@ -1,5 +1,8 @@
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using SolidarityBlood.API.Filters;
 using SolidarityBlood.Application.Commands.Donors;
+using SolidarityBlood.Application.Validators.Donors;
 using SolidarityBlood.Core.Repositories;
 using SolidarityBlood.Infrastructure.Persistence;
 using SolidarityBlood.Infrastructure.Persistence.Repositories;
@@ -8,11 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.Filters.Add(typeof(ValidationFilter)))
+   .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CreateDonorValidator>());
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 
 //  ==== CONFIGURATIONS ====
 
@@ -21,7 +25,6 @@ builder.Services.AddDbContext<SolidarityBloodDbContext>(options =>
         options.UseSqlServer(connectionString));
 
 builder.Services.AddMediatR(options => options.RegisterServicesFromAssemblyContaining(typeof(CreateDonorCommand)));
-
 
 builder.Services.AddScoped<IDonorRepository, DonorRepository>();
 builder.Services.AddScoped<IDonationRepository, DonationRepository>();

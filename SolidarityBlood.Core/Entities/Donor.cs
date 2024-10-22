@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SolidarityBlood.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -20,6 +21,8 @@ namespace SolidarityBlood.Core.Entities
             BloodTypes = bloodTypes;
             RHFactor = rHFactor;
             AddressId = addressId;
+
+            Status = DonorStatusEnum.Active;
         }
 
         public string FullName { get; private set; }
@@ -29,16 +32,19 @@ namespace SolidarityBlood.Core.Entities
         public double Weight { get; private set; }
         public string BloodTypes { get; private set; }
         public string RHFactor { get; private set; }
+        public DonorStatusEnum Status { get; private set; }
+
 
         // FOREIGN KEYS
         public int AddressId { get; private set; }
 
-        //PROPRIEDADES DE NAVEGAÇÃO
+
+        // NAVIGATION PROPERTIES
         public List<Donation>? Donation { get; private set; }
         public Address? Address { get; private set; }
 
 
-       public void Update(string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor, int addressId)
+       public void Update(string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor, int addressId, DonorStatusEnum status)
         {
             FullName = fullName;
             Email = email;
@@ -48,6 +54,26 @@ namespace SolidarityBlood.Core.Entities
             BloodTypes = bloodTypes;
             RHFactor = rHFactor;
             AddressId = addressId;
+            Status = status;
+        }
+
+
+        // PASSING STATUS
+
+        public void Inactive()
+        {
+            if (Status == DonorStatusEnum.Active)
+            {
+                Status = DonorStatusEnum.Inactive;
+            }
+        }
+
+        public void Deleted()
+        {
+            if (Status == DonorStatusEnum.Active || Status == DonorStatusEnum.Inactive)
+            {
+                Status = DonorStatusEnum.Deleted;
+            }
         }
 
     }   

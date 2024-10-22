@@ -1,4 +1,5 @@
 ﻿using SolidarityBlood.Core.Entities;
+using SolidarityBlood.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -22,7 +22,7 @@ namespace SolidarityBlood.Application.Queries.Donor
         {
             var getById = await _donorRepository.GetByIdDonor(request.Id);
 
-            var donor = new GetByIdDonorDTO(getById.Id, getById.FullName, getById.Email, getById.DateBirth, getById.Gender, getById.Weight, getById.BloodTypes, getById.RHFactor, getById.AddressId);
+            var donor = new GetByIdDonorDTO(getById.Id, getById.FullName, getById.Email, getById.DateBirth, getById.Gender, getById.Weight, getById.BloodTypes, getById.RHFactor, getById.AddressId, getById.Status);
 
             return donor;
         }

@@ -23,7 +23,7 @@ namespace SolidarityBlood.Application.Queries.Address
         {
             var get = await _addressRepository.GetByIdAddress(request.Id);
 
-            var address = new GetByIdAddressDTO(get.Id, get.PublicPlace, get.City, get.State, get.ZipCode);
+            var address = new GetByIdAddressDTO(get.Id, get.PublicPlace, get.City, get.State, get.ZipCode, get.Status);
 
             return address;
         }

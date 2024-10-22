@@ -1,4 +1,5 @@
 ﻿using SolidarityBlood.Core.Entities;
+using SolidarityBlood.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace SolidarityBlood.Application.DTOs.Donors
 {
    public class GetAllDonorsDTO : BaseEntity
     {
-        public GetAllDonorsDTO(int id, string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor, int addressId)
+        public GetAllDonorsDTO(int id, string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor, int addressId, DonorStatusEnum status)
         {
             Id = id;
             FullName = fullName;
@@ -19,7 +20,8 @@ namespace SolidarityBlood.Application.DTOs.Donors
             Weight = weight;
             BloodTypes = bloodTypes;
             RHFactor = rHFactor;
-            AddressId = addressId; 
+            AddressId = addressId;
+            Status = status;
         }
 
         public int Id { get; set; }
@@ -31,5 +33,6 @@ namespace SolidarityBlood.Application.DTOs.Donors
         public string BloodTypes { get; set; }
         public string RHFactor { get; set; }
         public int AddressId{ get; set; }
+        public DonorStatusEnum Status{ get; set; }
     }
 }
