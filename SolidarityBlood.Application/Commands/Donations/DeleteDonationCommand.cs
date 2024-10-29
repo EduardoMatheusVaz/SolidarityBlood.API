@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace SolidarityBlood.Application.Commands.Donations
 {
-    public class DeleteDonnationCommand : IRequest<Unit>
+    public class DeleteDonationCommand : IRequest<Unit>
     {
-        public DeleteDonnationCommand(int id)
+        public DeleteDonationCommand(int id, string reasonCanceled)
         {
             Id = id;
+            ReasonCanceled = reasonCanceled;
         }
 
         public int Id { get; set; }
+        public string ReasonCanceled { get; set; }
     }
 }

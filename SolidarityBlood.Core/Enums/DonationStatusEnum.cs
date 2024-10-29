@@ -8,6 +8,7 @@ namespace SolidarityBlood.Core.Enums
 {
     public enum DonationStatusEnum
     {
+
         Complete = 0,
         Pending = 1,
         Canceled = 2

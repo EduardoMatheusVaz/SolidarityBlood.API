@@ -27,7 +27,8 @@ namespace SolidarityBlood.Application.Queries.BloodStock
                 l.BloodType,
                 l.RHFactor,
                 l.QuantityMl,
-                l.Status
+                l.Status,
+                l.ReasonUnavailable
                 )).ToList();
 
             return list;

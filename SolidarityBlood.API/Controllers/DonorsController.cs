@@ -55,7 +55,7 @@ namespace SolidarityBlood.API.Controllers
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, UpdateDonorCommand command)
-        {
+        {                
             await _mediator.Send(command);
 
             return NoContent();
@@ -63,8 +63,12 @@ namespace SolidarityBlood.API.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id, string reasonExclusion)
         {
+            var delete = new DeleteDonorCommand(id, reasonExclusion);
+
+            await _mediator.Send(delete);
+
             return NoContent();
         }
     }

@@ -41,7 +41,7 @@ namespace SolidarityBlood.API.Controllers
 
         }
 
-
+         
         //  api/addresses/1
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -55,7 +55,7 @@ namespace SolidarityBlood.API.Controllers
 
 
         //  api/addresses/2
-        [HttpPut("{id}")]
+        [HttpPut("{id}/Update")]
         public async Task<IActionResult> Update(int id, UpdateAddressCommand command)
         {
             await _mediator.Send(command);
@@ -66,8 +66,12 @@ namespace SolidarityBlood.API.Controllers
 
         //  api/addresses/3
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id, string reasonExclusion)
         {
+            var delete = new DeleteAddressCommand(id, reasonExclusion);
+
+            await _mediator.Send(delete);
+
             return NoContent();
         }
     }

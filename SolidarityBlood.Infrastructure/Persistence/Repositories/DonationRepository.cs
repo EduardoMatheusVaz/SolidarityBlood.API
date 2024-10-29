@@ -28,9 +28,13 @@ namespace SolidarityBlood.Infrastructure.Persistence.Repositories
             return newDonation.Id;
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id, string canceled)
         {
-            throw new NotImplementedException();
+            var donation = await _dbcontext.Donation.FirstOrDefaultAsync(d => d.Id == id);
+
+            donation.Canceled(canceled);
+
+            await _dbcontext.SaveChangesAsync();
         }
 
         public async Task<List<Donation>> GetAllDonations()

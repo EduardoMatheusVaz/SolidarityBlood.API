@@ -13,6 +13,6 @@ namespace SolidarityBlood.Core.Repositories
         Task<List<Donor>> GetAllDonors();
         Task<Donor> GetByIdDonor(int id);
         Task Update(int id, Donor donor);
-        Task Delete(int id);
+        Task Delete(int id, string reasonExclusion);
     }
 }

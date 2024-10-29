@@ -13,6 +13,6 @@ namespace SolidarityBlood.Core.Repositories
         Task<List<BloodStock>> GetAllBloodStocks();
         Task<BloodStock> GeByIdBloodStock(int id);
         Task Update(int id, BloodStock bloodStock);
-        Task Delete(int id);
+        Task Delete(int id, string reasonUnavailable);
     }
 }

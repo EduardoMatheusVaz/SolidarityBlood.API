@@ -17,9 +17,11 @@ namespace SolidarityBlood.Application.Commands.BloodStocks
             _repository = repository;
         }
 
-        public Task<Unit> Handle(DeleteBloodStockCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteBloodStockCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _repository.Delete(request.Id, request.ReasonUnavailable);
+
+            return Unit.Value;
         }
     }
 }

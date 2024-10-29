@@ -26,18 +26,20 @@ namespace SolidarityBlood.Core.Entities
         public string State { get; private set; }
         public string ZipCode { get; private set; }
         public AddressStatusEnum Status{ get; private set; }
+        public string? ReasonExclusion { get; set; }
+
 
 
         //PROPRIEDADE DE NAVEGAÇÃO
         public ICollection<Donor>? Donors { get; private set; }
 
-        public void Update(string publicPlace, string city, string state, string zipCode, AddressStatusEnum status)
+        public void Update(string publicPlace, string city, string state, string zipCode)
         {
             PublicPlace = publicPlace;
             City = city;
             State = state;
             ZipCode = zipCode;
-            Status = status;
+
         }
 
 
@@ -51,8 +53,10 @@ namespace SolidarityBlood.Core.Entities
             }
         }
 
-        public void Deleted()
+        public void Deleted(string reasonExclusion)
         {
+            ReasonExclusion = reasonExclusion;
+
             if (Status == AddressStatusEnum.Active || Status == AddressStatusEnum.Inactive)
             {
                 Status = AddressStatusEnum.Deleted;

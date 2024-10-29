@@ -10,7 +10,7 @@ namespace SolidarityBlood.Application.DTOs.Addresses
 {
     public class GetByIdAddressDTO : BaseEntity
     {
-        public GetByIdAddressDTO(int id, string publicPlace, string city, string state, string zipCode, AddressStatusEnum status)
+        public GetByIdAddressDTO(int id, string publicPlace, string city, string state, string zipCode, AddressStatusEnum status, string? reasonExclusion)
         {
             Id = id;
             PublicPlace = publicPlace;
@@ -18,6 +18,7 @@ namespace SolidarityBlood.Application.DTOs.Addresses
             State = state;
             ZipCode = zipCode;
             Status = status;
+            ReasonExclusion = reasonExclusion;
         }
 
         public int Id { get; set; }
@@ -26,6 +27,7 @@ namespace SolidarityBlood.Application.DTOs.Addresses
         public string State { get; set; }
         public string ZipCode { get; set; }
         public AddressStatusEnum Status { get; set; }
+        public string? ReasonExclusion{ get; set; }
 
     }
 }

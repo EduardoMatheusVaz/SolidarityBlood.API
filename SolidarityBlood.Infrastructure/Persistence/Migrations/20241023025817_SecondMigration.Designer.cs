@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SolidarityBlood.Infrastructure.Persistence;
 
@@ -11,9 +12,11 @@ using SolidarityBlood.Infrastructure.Persistence;
 namespace SolidarityBlood.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(SolidarityBloodDbContext))]
-    partial class SolidarityBloodDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241023025817_SecondMigration")]
+    partial class SecondMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,6 +42,7 @@ namespace SolidarityBlood.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ReasonExclusion")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
@@ -77,6 +81,7 @@ namespace SolidarityBlood.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ReasonUnavailable")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
@@ -105,6 +110,7 @@ namespace SolidarityBlood.Infrastructure.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ReasonCanceled")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
@@ -152,6 +158,7 @@ namespace SolidarityBlood.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ReasonExclusion")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")

@@ -21,6 +21,8 @@ namespace SolidarityBlood.Core.Entities
         public DateTime DateDonation { get; private set; }
         public int QuantityMl { get; private set; }
         public DonationStatusEnum Status { get; private set; }
+        public string? ReasonCanceled { get; set; }
+
 
         // FOREIGN KEYS
         public int DonorId { get; private set; }
@@ -28,12 +30,12 @@ namespace SolidarityBlood.Core.Entities
         // PROPRIEDADE DE NAVEGAÇÃO
         public Donor? Donor { get; private set; }
 
-        public void Update(int donorId, DateTime dateDonation, int quantityMl, DonationStatusEnum status)
+        public void Update(int donorId, DateTime dateDonation, int quantityMl)
         {
             DonorId = donorId;
             DateDonation = dateDonation;
             QuantityMl = quantityMl;
-            Status = status;
+
         }
 
 
@@ -47,8 +49,10 @@ namespace SolidarityBlood.Core.Entities
             }
         }
     
-        public void Canceled()
+        public void Canceled(string canceled)
         {
+            ReasonCanceled = canceled;
+
             if (Status == DonationStatusEnum.Complete || Status == DonationStatusEnum.Pending)
             {
                 Status = DonationStatusEnum.Canceled;

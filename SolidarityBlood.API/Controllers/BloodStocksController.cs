@@ -63,8 +63,12 @@ namespace SolidarityBlood.API.Controllers
 
         //  api/addresses/3
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, string reasonUnavailable)
         {
+            var delete = new DeleteBloodStockCommand(id, reasonUnavailable);
+
+            await _mediator.Send(delete);
+
             return NoContent();
         }
     }

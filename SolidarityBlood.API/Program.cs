@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SolidarityBlood.API.Filters;
 using SolidarityBlood.Application.Commands.Donors;
@@ -12,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers(options => options.Filters.Add(typeof(ValidationFilter)))
-   .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CreateDonorValidator>());
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CreateDonorValidator>());
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -25,6 +26,12 @@ builder.Services.AddDbContext<SolidarityBloodDbContext>(options =>
         options.UseSqlServer(connectionString));
 
 builder.Services.AddMediatR(options => options.RegisterServicesFromAssemblyContaining(typeof(CreateDonorCommand)));
+
+// estou arriscando nisso na verdade
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true; 
+});
 
 builder.Services.AddScoped<IDonorRepository, DonorRepository>();
 builder.Services.AddScoped<IDonationRepository, DonationRepository>();

@@ -33,6 +33,7 @@ namespace SolidarityBlood.Core.Entities
         public string BloodTypes { get; private set; }
         public string RHFactor { get; private set; }
         public DonorStatusEnum Status { get; private set; }
+        public string? ReasonExclusion { get; set; }
 
 
         // FOREIGN KEYS
@@ -44,7 +45,7 @@ namespace SolidarityBlood.Core.Entities
         public Address? Address { get; private set; }
 
 
-       public void Update(string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor, int addressId, DonorStatusEnum status)
+       public void Update(string fullName, string email, DateTime dateBirth, string gender, double weight, string bloodTypes, string rHFactor, int addressId)
         {
             FullName = fullName;
             Email = email;
@@ -54,7 +55,7 @@ namespace SolidarityBlood.Core.Entities
             BloodTypes = bloodTypes;
             RHFactor = rHFactor;
             AddressId = addressId;
-            Status = status;
+
         }
 
 
@@ -68,13 +69,18 @@ namespace SolidarityBlood.Core.Entities
             }
         }
 
-        public void Deleted()
+        public void Deleted(string reasonExclusion)
         {
+            ReasonExclusion = reasonExclusion;
+
             if (Status == DonorStatusEnum.Active || Status == DonorStatusEnum.Inactive)
             {
                 Status = DonorStatusEnum.Deleted;
             }
         }
+
+        
+
 
     }   
 }

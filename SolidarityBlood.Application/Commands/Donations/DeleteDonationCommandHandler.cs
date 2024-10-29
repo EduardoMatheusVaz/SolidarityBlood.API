@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using SolidarityBlood.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,20 @@ using System.Threading.Tasks;
 
 namespace SolidarityBlood.Application.Commands.Donations
 {
-    public class DeleteDonationCommandHandler : IRequestHandler<DeleteDonnationCommand, Unit>
+    public class DeleteDonationCommandHandler : IRequestHandler<DeleteDonationCommand, Unit>
     {
-        public Task<Unit> Handle(DeleteDonnationCommand request, CancellationToken cancellationToken)
+        private readonly IDonationRepository _donationRepository;
+
+        public DeleteDonationCommandHandler(IDonationRepository donationRepository)
         {
-            throw new NotImplementedException();
+            _donationRepository = donationRepository;
+        }
+
+        public async Task<Unit> Handle(DeleteDonationCommand request, CancellationToken cancellationToken)
+        {
+            await _donationRepository.Delete(request.Id, request.ReasonCanceled);
+
+            return Unit.Value;
         }
     }
 }

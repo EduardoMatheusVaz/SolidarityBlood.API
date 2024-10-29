@@ -9,5 +9,13 @@ namespace SolidarityBlood.Application.Commands.Donors
 {
     public class DeleteDonorCommand : IRequest<Unit>
     {
+        public DeleteDonorCommand(int id, string reasonExclusion)
+        {
+            Id = id;
+            ReasonExclusion = reasonExclusion;
+        }
+
+        public int Id { get; set; }
+        public string ReasonExclusion{ get; set; }
     }
 }

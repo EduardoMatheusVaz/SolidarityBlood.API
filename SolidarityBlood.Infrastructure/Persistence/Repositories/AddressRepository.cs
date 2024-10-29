@@ -28,9 +28,13 @@ namespace SolidarityBlood.Infrastructure.Persistence.Repositories
             return newAddress.Id;
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id, string reasonExclusion)
         {
-            throw new NotImplementedException();
+            var address = await _dbcontext.Address.FirstOrDefaultAsync(a => a.Id == id);
+
+            address.Deleted(reasonExclusion);
+
+            await _dbcontext.SaveChangesAsync();
         }
 
         public async Task<List<Address>> GetAllAddress()

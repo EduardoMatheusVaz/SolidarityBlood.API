@@ -28,7 +28,8 @@ namespace SolidarityBlood.Application.Queries.Address
                 l.City,
                 l.State,
                 l.ZipCode,
-                l.Status
+                l.Status,
+                l.ReasonExclusion
                 )).ToList();
 
             return list;

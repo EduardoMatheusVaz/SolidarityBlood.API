@@ -27,7 +27,8 @@ namespace SolidarityBlood.Application.Queries.Donation
                 l.DonorId,
                 l.DateDonation,
                 l.QuantityMl,
-                l.Status
+                l.Status,
+                l.ReasonCanceled
                 )).ToList();
 
             return list;

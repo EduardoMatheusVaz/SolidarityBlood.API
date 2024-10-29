@@ -32,7 +32,8 @@ namespace SolidarityBlood.Application.Queries.Donor
                 l.BloodTypes,
                 l.RHFactor,
                 l.AddressId,
-                l.Status
+                l.Status,
+                l.ReasonExclusion
                 )).ToList();
 
             return newList;

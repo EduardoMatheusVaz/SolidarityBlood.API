@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using SolidarityBlood.Core.Entities;
 using SolidarityBlood.Core.Repositories;
 using System;
@@ -28,9 +29,13 @@ namespace SolidarityBlood.Infrastructure.Persistence.Repositories
             return bl.Id;
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id, string reasonUnavailable)
         {
-            throw new NotImplementedException();
+            var stock = await _dbcontext.BloodStock.FirstOrDefaultAsync();
+
+            stock.Unavailable(reasonUnavailable);
+
+            await _dbcontext.SaveChangesAsync();
         }
 
         public async Task<BloodStock> GeByIdBloodStock(int id)

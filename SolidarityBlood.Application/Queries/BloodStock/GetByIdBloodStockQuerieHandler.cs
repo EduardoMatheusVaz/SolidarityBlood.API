@@ -22,7 +22,7 @@ namespace SolidarityBlood.Application.Queries.BloodStock
         {
             var get = await _repository.GeByIdBloodStock(request.Id);
 
-            var stock = new GetByIdBloodStockDTO(get.Id, get.BloodType, get.RHFactor, get.QuantityMl, get.Status);
+            var stock = new GetByIdBloodStockDTO(get.Id, get.BloodType, get.RHFactor, get.QuantityMl, get.Status, get.ReasonUnavailable);
 
             return stock;
         }

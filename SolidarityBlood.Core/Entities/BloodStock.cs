@@ -22,14 +22,16 @@ namespace SolidarityBlood.Core.Entities
         public string RHFactor { get; private set; }
         public int QuantityMl { get; private set; }
         public BloodStockStatusEnum Status{ get; private set; }
+        public string? ReasonUnavailable { get; set; }
 
 
-        public void Update(string bloodType, string rHFactor, int quantityMl, BloodStockStatusEnum status)
+
+        public void Update(string bloodType, string rHFactor, int quantityMl)
         {
             BloodType = bloodType;
             RHFactor = rHFactor;
             QuantityMl = quantityMl;
-            Status = status;
+
         }
 
         // PASSING STATUS
@@ -42,8 +44,10 @@ namespace SolidarityBlood.Core.Entities
             }
         }
 
-        public void Unavailable()
+        public void Unavailable(string reasonUnavailable)
         {
+            ReasonUnavailable = reasonUnavailable;
+
             if (Status == BloodStockStatusEnum.Available || Status == BloodStockStatusEnum.UnderReview)
             {
                 Status = BloodStockStatusEnum.Unavailable;

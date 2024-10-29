@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace SolidarityBlood.API.Filters
 {
@@ -6,12 +7,21 @@ namespace SolidarityBlood.API.Filters
     {
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            throw new NotImplementedException();
         }
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            throw new NotImplementedException();
+
+            if (!context.ModelState.IsValid)
+            {
+                var messages = context.ModelState
+                    .SelectMany(c => c.Value.Errors)
+                    .Select(e => e.ErrorMessage)
+                    .ToList();
+
+                context.Result = new BadRequestObjectResult(messages); 
+            }
+
         }
     }
 }

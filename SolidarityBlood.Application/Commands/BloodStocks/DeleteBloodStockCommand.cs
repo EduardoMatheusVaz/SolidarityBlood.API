@@ -9,11 +9,13 @@ namespace SolidarityBlood.Application.Commands.BloodStocks
 {
     public class DeleteBloodStockCommand : IRequest<Unit>
     {
-        public DeleteBloodStockCommand(int id)
+        public DeleteBloodStockCommand(int id, string reasonUnavailable)
         {
             Id = id;
+            ReasonUnavailable = reasonUnavailable;
         }
 
         public int Id { get; set; }
+        public string ReasonUnavailable { get; set; }
     }
 }

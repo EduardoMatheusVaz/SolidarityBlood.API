@@ -17,9 +17,11 @@ namespace SolidarityBlood.Application.Commands.Addresses
             _addressRepository = addressRepository;
         }
 
-        public Task<Unit> Handle(DeleteAddressCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteAddressCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _addressRepository.Delete(request.Id, request.ReasonExclusion);
+        
+            return Unit.Value;
         }
     }
 }

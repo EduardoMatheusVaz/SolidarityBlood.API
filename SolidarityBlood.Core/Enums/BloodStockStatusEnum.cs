@@ -8,6 +8,7 @@ namespace SolidarityBlood.Core.Enums
 {
     public enum BloodStockStatusEnum
     {
+
         Available = 0,
         UnderReview = 1,
         Unavailable = 2
