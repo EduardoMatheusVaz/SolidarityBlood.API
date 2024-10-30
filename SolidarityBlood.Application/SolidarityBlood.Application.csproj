@@ -17,10 +17,4 @@
     <PackageReference Include="MediatR" Version="12.4.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Validators\Addresses\" />
-    <Folder Include="Validators\BloodStocks\" />
-    <Folder Include="Validators\Donations\" />
-  </ItemGroup>
-
 </Project>

@@ -11,6 +11,6 @@ namespace SolidarityBlood.Application.Commands.BloodStocks
     {
         public string BloodType { get; set; }
         public string RHFactor { get; set; }
-        public int QuantityMl { get; set; }
+        public int? QuantityMl { get; set; }
     }
 }

@@ -33,8 +33,7 @@ namespace SolidarityBlood.Application.Validators.Donors
 
             RuleFor(db => db.DateBirth)
                 .NotEmpty()
-                .WithMessage("ÓBVIO que a data de aniversário não pode ser vazia e nem nula meu campeão, mas isso é ÓBVIO!")
-                .
+                .WithMessage("ÓBVIO que a data de aniversário não pode ser vazia e nem nula meu campeão, mas isso é ÓBVIO!");
 
             RuleFor(g => g.Gender)
                 .NotEmpty()

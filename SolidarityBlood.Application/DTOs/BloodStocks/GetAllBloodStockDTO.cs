@@ -10,7 +10,7 @@ namespace SolidarityBlood.Application.DTOs.BloodStocks
 {
     public class GetAllBloodStockDTO : BaseEntity
     {
-        public GetAllBloodStockDTO(int id, string bloodType, string rHFactor, int quantityMl, BloodStockStatusEnum status, string? reasonUnavailable)
+        public GetAllBloodStockDTO(int id, string bloodType, string rHFactor, int? quantityMl, BloodStockStatusEnum status, string? reasonUnavailable)
         {
             Id = id;
             BloodType = bloodType;
@@ -23,7 +23,7 @@ namespace SolidarityBlood.Application.DTOs.BloodStocks
         public int Id { get; set; }
         public string BloodType { get; set; }
         public string RHFactor { get; set; }
-        public int QuantityMl { get; set; }
+        public int? QuantityMl { get; set; }
         public BloodStockStatusEnum Status { get; set; }
         public string? ReasonUnavailable{ get; set; }
 

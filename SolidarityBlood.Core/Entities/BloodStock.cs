@@ -9,7 +9,7 @@ namespace SolidarityBlood.Core.Entities
 {
     public class BloodStock : BaseEntity
     {
-        public BloodStock(string bloodType, string rHFactor, int quantityMl)
+        public BloodStock(string bloodType, string rHFactor, int? quantityMl)
         {
             BloodType = bloodType;
             RHFactor = rHFactor;
@@ -20,13 +20,13 @@ namespace SolidarityBlood.Core.Entities
 
         public string BloodType { get; private set; }
         public string RHFactor { get; private set; }
-        public int QuantityMl { get; private set; }
+        public int? QuantityMl { get; private set; }
         public BloodStockStatusEnum Status{ get; private set; }
         public string? ReasonUnavailable { get; set; }
 
 
 
-        public void Update(string bloodType, string rHFactor, int quantityMl)
+        public void Update(string bloodType, string rHFactor, int? quantityMl)
         {
             BloodType = bloodType;
             RHFactor = rHFactor;

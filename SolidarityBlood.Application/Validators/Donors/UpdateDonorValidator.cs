@@ -13,7 +13,7 @@ namespace SolidarityBlood.Application.Validators.Donors
 
         public UpdateDonorValidator()
         {
-            
+
             RuleFor(fn => fn.FullName)
                 .NotEmpty()
                 .WithMessage("Nome do Doador não pode ser vazio nem nulo!")
@@ -29,6 +29,10 @@ namespace SolidarityBlood.Application.Validators.Donors
                 .WithMessage("Email digitado é inválido!")
                 .MaximumLength(65)
                 .WithMessage("Email informado excedeu o limite de 65 caracteres");
+
+            RuleFor(db => db.DateBirth)
+                .NotEmpty()
+                .WithMessage("ÓBVIO que a data de aniversário não pode ser vazia e nem nula meu campeão, mas isso é ÓBVIO!");
 
             RuleFor(g => g.Gender)
                 .NotEmpty()
@@ -53,8 +57,7 @@ namespace SolidarityBlood.Application.Validators.Donors
                 .WithMessage("Fator RH não pode ser vazio nem nulo!")
                 .Must(mm => mm == "+" || mm == "-")
                 .WithMessage("Fator RH não pode ser diferente de + ou -, entendeu?");
-        
-        
+
         }
 
     }
