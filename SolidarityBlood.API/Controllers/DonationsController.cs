@@ -5,6 +5,8 @@ using SolidarityBlood.Application.DTOs.Donations;
 using SolidarityBlood.Application.Queries.Donation;
 using SolidarityBlood.Core.Entities;
 using SolidarityBlood.Infrastructure.Persistence;
+using System.Reflection.Metadata;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SolidarityBlood.API.Controllers
 {
@@ -22,9 +24,18 @@ namespace SolidarityBlood.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateDonationCommand command)
         {
-            var id = await _mediator.Send(command);
-            
-            return CreatedAtAction(nameof(GetById), new { Id = id}, id);
+            try
+            {
+                int result = await _mediator.Send(command);
+                return Ok(result);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+
+            //var id = await _mediator.Send(command);
+            //return CreatedAtAction(nameof(GetById), new { Id = id}, id);
         }
 
 

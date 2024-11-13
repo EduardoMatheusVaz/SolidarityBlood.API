@@ -42,9 +42,7 @@ namespace SolidarityBlood.Application.Validators.Donors
 
             RuleFor(w => w.Weight)
                 .NotEmpty()
-                .WithMessage("Peso não pode ser vazio e nem nulo!")
-                .GreaterThanOrEqualTo(50.0)
-                .WithMessage("Para você se cadastrar deve conter NO MÍNIMO 50kg, afinal esse é o péso MÍNIMO para se poder doar sangue...");
+                .WithMessage("Peso não pode ser vazio e nem nulo!");
 
             RuleFor(bt => bt.BloodTypes)
                 .NotEmpty()

@@ -23,13 +23,24 @@ namespace SolidarityBlood.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateDonorCommand command)
         {
-            var id = await _mediator.Send(command);
+            try
+            {
+                var id = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { Id = id }, command);
+                return CreatedAtAction(nameof(GetById), new { Id = id }, command);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+
+            //var id = await _mediator.Send(command);
+
+            //return CreatedAtAction(nameof(GetById), new { Id = id }, command);
         }
 
 
-        [HttpGet]
+        [HttpGet("/Consultar Doadores")]
         public async Task<IActionResult> GetAll()
         {
             var get = new GetAllDonorsQuerie();
@@ -41,7 +52,7 @@ namespace SolidarityBlood.API.Controllers
 
 
         //  api/donors/1
-        [HttpGet("{id}")]
+        [HttpGet("{id}/ Doador")]
         public async Task<IActionResult> GetById(int id)
         {
             var get = new GetByIdDonorQuerie(id);
@@ -52,8 +63,17 @@ namespace SolidarityBlood.API.Controllers
 
         }
 
+        [HttpGet("{id}/ Historico Doacao")]
+        public async Task<IActionResult> GetDonorHistory(int id)
+        {
+            var get = new GetDonorHistoryQuerie(id);
 
-        [HttpPut("{id}")]
+            var history = await _mediator.Send(get);
+
+            return Ok(history);
+        }
+
+        [HttpPut("{id}/ Update")]
         public async Task<IActionResult> Update(int id, UpdateDonorCommand command)
         {                
             await _mediator.Send(command);
@@ -62,7 +82,7 @@ namespace SolidarityBlood.API.Controllers
         }
 
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}/ Delete")]
         public async Task<IActionResult> Delete(int id, string reasonExclusion)
         {
             var delete = new DeleteDonorCommand(id, reasonExclusion);

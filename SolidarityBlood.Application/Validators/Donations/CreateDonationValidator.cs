@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using SolidarityBlood.Application.Commands.Donations;
+using SolidarityBlood.Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,7 @@ namespace SolidarityBlood.Application.Validators.Donations
                 .NotEmpty()
                 .WithMessage("Primeiramente, para você fazer uma doação de sangue você precisa DOAR SANGUE! Então peço que informe a quantidade de sangue que irá doar para prosseguirmos, por favor!")
                 .InclusiveBetween(420, 470)
-                .WithMessage("Para efetuar a doação, você deve doar NO MÍNIMO 420ml e NO MÁXIMO 470ml...");
-
-
+                .WithMessage("Para efetuar a doação, você deve doar NO MÍNIMO 420 ml e NO MÁXIMO 470 ml...");
 
 
         }

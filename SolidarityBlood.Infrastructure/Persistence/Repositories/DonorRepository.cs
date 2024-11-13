@@ -51,6 +51,19 @@ namespace SolidarityBlood.Infrastructure.Persistence.Repositories
             return donor;
         }
 
+        
+        public async Task<List<Donation>> GetDonorHistory(int id)
+        {
+            
+            var list = await _dbcontext.Donation
+                    .Where(d => d.DonorId == id)
+                    .OrderByDescending(d => d.DateDonation)
+                    .ToListAsync();
+
+            return list;
+        }
+
+
         public async Task Update(int id, Donor donor)
         {
             var diskdonor = await _dbcontext.Donor.FirstOrDefaultAsync(d => d.Id == id);

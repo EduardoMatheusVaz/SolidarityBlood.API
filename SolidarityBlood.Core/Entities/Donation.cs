@@ -35,12 +35,10 @@ namespace SolidarityBlood.Core.Entities
             DonorId = donorId;
             DateDonation = dateDonation;
             QuantityMl = quantityMl;
-
         }
 
 
         // PASSING STATUS
-    
         public void Completed()
         {
             if (Status == DonationStatusEnum.Pending)
@@ -58,6 +56,9 @@ namespace SolidarityBlood.Core.Entities
                 Status = DonationStatusEnum.Canceled;
             }
         }
+
+
+
 
     }
 }

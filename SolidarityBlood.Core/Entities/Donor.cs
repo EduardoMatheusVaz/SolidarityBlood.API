@@ -59,6 +59,71 @@ namespace SolidarityBlood.Core.Entities
         }
 
 
+        // METHODS
+
+
+        public bool ValidateWeight()
+        {
+            if (Weight >= 50)
+            {
+                return true;
+            }
+            else
+            {
+                throw new InvalidOperationException("Peso mínimo para efetuar a doação seria de 50 kg!");
+            }
+        }
+
+
+        public bool ValidateAge()
+        {
+            var age = DateTime.Now.Year - DateBirth.Year;
+
+            if(age >= 18)
+            {
+                return true;
+            }
+            else
+            {
+                throw new InvalidOperationException("Menores de idade não podem efetuar nenhuma doação, contudo nós permitimos o cadastro em nosso sistema até que tenhas idade apropriada para doar");
+            }
+        }
+
+        public bool ValidateIntervalDays(DateTime date)
+        {
+            if (Gender.Equals("Masculino"))
+            {
+                TimeSpan intervalDays = DateTime.Now - date;
+
+                if (intervalDays.Days >= 60)
+                {
+                    return true;
+                }
+                else
+                {
+                    throw new InvalidOperationException("Doadores do gênero Masculino somente podem doar sangue de 60 em 60 dias");
+                }
+
+            }
+            if (Gender.Equals("Feminino"))
+            {
+                TimeSpan intervalDays = DateTime.Now - date;
+
+                if (intervalDays.Days >= 90)
+                {
+                    return true;
+                }
+                else
+                {
+                    throw new InvalidOperationException("Doadoras do gênero Feminino somente podem doar sangue de 90 em 90 dias");
+                }
+            }
+
+            return false;
+
+        }
+
+
         // PASSING STATUS
 
         public void Inactive()
