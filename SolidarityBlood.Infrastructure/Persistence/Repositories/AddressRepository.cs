@@ -20,7 +20,7 @@ namespace SolidarityBlood.Infrastructure.Persistence.Repositories
 
         public async Task<int> CreateAddress(Address address)
         {
-            var newAddress = new Address(address.PublicPlace, address.City, address.State, address.ZipCode);
+            var newAddress = new Address(address.PublicPlace, address.Complement, address.Neighborhood,address.City, address.State, address.ZipCode);
 
             await _dbcontext.Address.AddAsync(newAddress);
             await _dbcontext.SaveChangesAsync();

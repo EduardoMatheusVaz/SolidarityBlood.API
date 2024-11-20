@@ -11,9 +11,11 @@ namespace SolidarityBlood.Core.Entities
 {
     public class Address : BaseEntity
     {
-        public Address(string publicPlace, string city, string state, string zipCode)
+        public Address(string publicPlace, string? complement, string neighborhood, string city, string state, string zipCode)
         {
             PublicPlace = publicPlace;
+            Complement = complement;
+            Neighborhood = neighborhood;
             City = city;
             State = state;
             ZipCode = zipCode;
@@ -22,6 +24,8 @@ namespace SolidarityBlood.Core.Entities
         }
 
         public string PublicPlace { get; private set; }
+        public string? Complement{ get; private set; }
+        public string Neighborhood { get; private set; }
         public string City { get; private set; }
         public string State { get; private set; }
         public string ZipCode { get; private set; }

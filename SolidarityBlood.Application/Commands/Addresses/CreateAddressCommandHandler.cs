@@ -25,7 +25,7 @@ namespace SolidarityBlood.Application.Commands.Addresses
         {
             
             var responseViaCep = await _viaCepIntegration.GetDataViaCep(request.ZipCode);
-            var address = new Address(responseViaCep.Logradouro, responseViaCep.Localidade, responseViaCep.Uf, responseViaCep.Cep);
+            var address = new Address(responseViaCep.Logradouro, responseViaCep.Complemento, responseViaCep.Bairro, responseViaCep.Localidade, responseViaCep.Uf, responseViaCep.Cep);
 
             await _addressRepository.CreateAddress(address);
 

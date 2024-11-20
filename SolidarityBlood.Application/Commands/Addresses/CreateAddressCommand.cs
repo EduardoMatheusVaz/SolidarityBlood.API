@@ -9,9 +9,6 @@ namespace SolidarityBlood.Application.Commands.Addresses
 {
     public class CreateAddressCommand : IRequest<int>
     {
-        //public string? PublicPlace { get; set; }
-        //public string? City { get; set; }
-        //public string? State { get; set; }
         public string ZipCode { get; set; }
     }
 }

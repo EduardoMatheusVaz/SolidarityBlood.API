@@ -20,7 +20,7 @@ namespace SolidarityBlood.Application.Commands.Addresses
 
         public async Task<Unit> Handle(UpdateAddressCommand request, CancellationToken cancellationToken)
         {
-            var address = new Address(request.PublicPlace, request.City, request.State, request.ZipCode);
+            var address = new Address(request.PublicPlace, request.Complement, request.Neighborhood, request.City, request.State, request.ZipCode);
 
             await _addressRepository.UpdateAddress(request.Id, address);
         
