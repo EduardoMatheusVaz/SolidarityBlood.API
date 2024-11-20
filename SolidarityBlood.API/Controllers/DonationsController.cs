@@ -21,7 +21,7 @@ namespace SolidarityBlood.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("/Create Donation")]
         public async Task<IActionResult> Create(CreateDonationCommand command)
         {
             try
@@ -39,7 +39,7 @@ namespace SolidarityBlood.API.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("/Consult Donations")]
         public async Task<IActionResult> GetAll()
         {
             var get = new GetAllDonationsQuerie();
@@ -51,7 +51,7 @@ namespace SolidarityBlood.API.Controllers
 
 
         //  api/donations/1
-        [HttpGet("{id}")]
+        [HttpGet("{id}/Donation")]
         public async Task<IActionResult> GetById(int id)
         {
             var get = new GetByIdDonationQuerie(id);
@@ -63,7 +63,7 @@ namespace SolidarityBlood.API.Controllers
 
 
         //  api/donations/2
-        [HttpPut("{id}")]
+        [HttpPut("{id}/Update")]
         public async Task<IActionResult> Update(int id, UpdateDonationCommand command)
         {
             await _mediator.Send(command);
@@ -73,7 +73,7 @@ namespace SolidarityBlood.API.Controllers
 
 
         //  api/donations/3
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}/Delete")]
         public async Task<IActionResult> Delete(int id, string reasonCanceled)
         {
             var delete = new DeleteDonationCommand(id, reasonCanceled);

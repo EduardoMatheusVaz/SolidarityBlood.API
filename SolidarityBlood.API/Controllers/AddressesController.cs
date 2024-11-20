@@ -20,7 +20,7 @@ namespace SolidarityBlood.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("Create Address")]
         public async Task<IActionResult> Create(CreateAddressCommand command)
         {
             var id = await _mediator.Send(command);
@@ -30,7 +30,7 @@ namespace SolidarityBlood.API.Controllers
 
 
         //  api/addresses/
-        [HttpGet]
+        [HttpGet("Consult Addresses")]
         public async Task<IActionResult> GetAll()
         {
             var get = new GetAllAddressQuerie();
@@ -43,7 +43,7 @@ namespace SolidarityBlood.API.Controllers
 
          
         //  api/addresses/1
-        [HttpGet("{id}")]
+        [HttpGet("{id}/Address")]
         public async Task<IActionResult> GetById(int id)
         {
             var get = new GetByIdAddressQuerie(id);
@@ -65,7 +65,7 @@ namespace SolidarityBlood.API.Controllers
 
 
         //  api/addresses/3
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}/Delete")]
         public async Task<IActionResult> Delete(int id, string reasonExclusion)
         {
             var delete = new DeleteAddressCommand(id, reasonExclusion);

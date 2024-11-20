@@ -9,8 +9,6 @@ namespace SolidarityBlood.Infrastructure.Integration.Interfaces
 {
     public interface IViaCepIntegration
     {
-
         Task<ViaCepResponse> GetDataViaCep(string cep);
-
     }
 }

@@ -20,7 +20,7 @@ namespace SolidarityBlood.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("Create Donor")]
         public async Task<IActionResult> Create(CreateDonorCommand command)
         {
             try
@@ -35,12 +35,11 @@ namespace SolidarityBlood.API.Controllers
             }
 
             //var id = await _mediator.Send(command);
-
             //return CreatedAtAction(nameof(GetById), new { Id = id }, command);
         }
 
 
-        [HttpGet("/Consultar Doadores")]
+        [HttpGet("Consult Donor")]
         public async Task<IActionResult> GetAll()
         {
             var get = new GetAllDonorsQuerie();
@@ -52,7 +51,7 @@ namespace SolidarityBlood.API.Controllers
 
 
         //  api/donors/1
-        [HttpGet("{id}/ Doador")]
+        [HttpGet("{id}/ Donor")]
         public async Task<IActionResult> GetById(int id)
         {
             var get = new GetByIdDonorQuerie(id);
@@ -63,7 +62,7 @@ namespace SolidarityBlood.API.Controllers
 
         }
 
-        [HttpGet("{id}/ Historico Doacao")]
+        [HttpGet("{id}/ Donor History")]
         public async Task<IActionResult> GetDonorHistory(int id)
         {
             var get = new GetDonorHistoryQuerie(id);
