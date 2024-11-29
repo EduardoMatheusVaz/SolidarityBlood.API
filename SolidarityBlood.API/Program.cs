@@ -11,6 +11,7 @@ using SolidarityBlood.Infrastructure.Persistence.Repositories;
 using SolidarityBlood.Infrastructure.Integration.Refit;
 using SolidarityBlood.Infrastructure.Integration.Interfaces;
 using SolidarityBlood.Infrastructure.Integration;
+using SolidarityBlood.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,8 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true; 
 });
+
+builder.Services.AddHostedService<StockCheckHostedService>();
 
 builder.Services.AddScoped<IDonorRepository, DonorRepository>();
 builder.Services.AddScoped<IDonationRepository, DonationRepository>();

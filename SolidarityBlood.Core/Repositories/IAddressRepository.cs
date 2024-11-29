@@ -12,6 +12,7 @@ namespace SolidarityBlood.Core.Repositories
         Task<int> CreateAddress(Address address);
         Task<List<Address>> GetAllAddress();
         Task <Address> GetByIdAddress(int id);
+        Task<List<Address>> GetDeletedAddress();
         Task UpdateAddress(int id, Address address);
         Task Delete(int id, string reasonExclusion);
     }

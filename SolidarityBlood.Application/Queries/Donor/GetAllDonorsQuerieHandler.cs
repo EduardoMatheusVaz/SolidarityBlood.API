@@ -34,7 +34,7 @@ namespace SolidarityBlood.Application.Queries.Donor
                 l.AddressId,
                 l.Status,
                 l.ReasonExclusion
-                )).ToList();
+                )).Where(d => d.Status == Core.Enums.DonorStatusEnum.Active).ToList();
 
             return newList;
         }

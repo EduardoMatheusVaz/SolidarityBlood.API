@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace SolidarityBlood.Application.Queries.Address
 {
-    public class GetAllAddressQuerieHandler : IRequestHandler<GetAllAddressQuerie, List<GetAllAddressDTO>>
+    public class GetDeleteAddressQuerieHandler : IRequestHandler<GetDeleteAddressQuerie, List<GetAllAddressDTO>>
     {
         private readonly IAddressRepository _addressRepository;
 
-        public GetAllAddressQuerieHandler(IAddressRepository addressRepository)
+        public GetDeleteAddressQuerieHandler(IAddressRepository addressRepository)
         {
             _addressRepository = addressRepository;
         }
 
-        public async Task<List<GetAllAddressDTO>> Handle(GetAllAddressQuerie request, CancellationToken cancellationToken)
+        public async Task<List<GetAllAddressDTO>> Handle(GetDeleteAddressQuerie request, CancellationToken cancellationToken)
         {
-            var addresses = await _addressRepository.GetAllAddress();
+            var addresses = await _addressRepository.GetDeletedAddress();
 
             var list = addresses.Select(l => new GetAllAddressDTO(
                 l.Id,
@@ -30,7 +30,7 @@ namespace SolidarityBlood.Application.Queries.Address
                 l.ZipCode,
                 l.Status,
                 l.ReasonExclusion
-                )).Where(a => a.Status == Core.Enums.AddressStatusEnum.Active).ToList();
+                )).Where(a => a.Status != Core.Enums.AddressStatusEnum.Active).ToList();
 
             return list;
         }

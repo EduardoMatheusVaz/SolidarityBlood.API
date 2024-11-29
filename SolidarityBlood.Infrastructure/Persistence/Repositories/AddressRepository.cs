@@ -51,6 +51,13 @@ namespace SolidarityBlood.Infrastructure.Persistence.Repositories
             return address;
         }
 
+        public async Task<List<Address>> GetDeletedAddress()
+        {
+            var addresses = await _dbcontext.Address.ToListAsync();
+
+            return addresses;
+        }
+
         public async Task UpdateAddress(int id, Address address)
         {
             var addressss = await _dbcontext.Address.FirstOrDefaultAsync(a => a.Id == id);

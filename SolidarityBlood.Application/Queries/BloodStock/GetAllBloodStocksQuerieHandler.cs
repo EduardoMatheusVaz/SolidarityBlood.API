@@ -29,7 +29,7 @@ namespace SolidarityBlood.Application.Queries.BloodStock
                 l.QuantityMl,
                 l.Status,
                 l.ReasonUnavailable
-                )).ToList();
+                )).Where(bl => bl.Status != Core.Enums.BloodStockStatusEnum.Unavailable).ToList();
 
             return list;
         }

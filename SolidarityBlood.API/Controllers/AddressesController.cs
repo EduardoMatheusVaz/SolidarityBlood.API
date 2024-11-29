@@ -54,6 +54,18 @@ namespace SolidarityBlood.API.Controllers
         }
 
 
+        [HttpGet("Consult Address Deleted")]
+        public async Task<IActionResult> GetDeleteAddress()
+        {
+            var get = new GetDeleteAddressQuerie();
+
+            var address = await _mediator.Send(get);
+
+            return Ok(address);
+        }
+
+
+
         //  api/addresses/2
         [HttpPut("{id}/Update")]
         public async Task<IActionResult> Update(int id, UpdateAddressCommand command)

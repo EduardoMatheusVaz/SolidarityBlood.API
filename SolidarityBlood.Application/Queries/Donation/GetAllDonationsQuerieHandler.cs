@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using SolidarityBlood.Application.DTOs.Donations;
+using SolidarityBlood.Core.Enums;
 using SolidarityBlood.Core.Repositories;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace SolidarityBlood.Application.Queries.Donation
                 l.QuantityMl,
                 l.Status,
                 l.ReasonCanceled
-                )).ToList();
+                )).Where(l => l.Status != DonationStatusEnum.Canceled).ToList();
 
             return list;
         }
