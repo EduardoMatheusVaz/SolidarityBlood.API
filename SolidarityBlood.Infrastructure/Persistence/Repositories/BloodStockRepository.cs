@@ -52,6 +52,16 @@ namespace SolidarityBlood.Infrastructure.Persistence.Repositories
             return bloodStock;
         }
 
+        public async Task<int> GetTotalBlood()
+        {
+            // ACREDITO QUE AINDA PODEMOS MELHORAR E UTILIZAR O DAPPER PARA ESCREVER UMA QUERY ONDE
+            // CONSIGAMOS RETORNAR O TOTAL DE SANGUE PARA UM DETERMINADO TIPO, ACHO MAIS VÁLIDO ASSIM...
+
+            var totalBlood = await _dbcontext.Donation.Select(q => q.QuantityMl).ToListAsync();
+
+            return totalBlood.Sum();
+        }
+
         public async Task Update(int id, BloodStock bloodStock)
         {
             var stock = await _dbcontext.BloodStock.FirstOrDefaultAsync(bs => bs.Id == id);
@@ -60,5 +70,7 @@ namespace SolidarityBlood.Infrastructure.Persistence.Repositories
 
             await _dbcontext.SaveChangesAsync();
         }
+
+
     }
 }

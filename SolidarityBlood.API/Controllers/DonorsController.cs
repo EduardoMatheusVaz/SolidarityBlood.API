@@ -62,6 +62,16 @@ namespace SolidarityBlood.API.Controllers
 
         }
 
+        [HttpGet("Consult Deleted Donor")]
+        public async Task<IActionResult> GetDeletedDonor()
+        {
+            var get = new GetDeletedDonorQuerie();
+
+            var command = await _mediator.Send(get);
+
+            return Ok(command);
+        }
+
         [HttpGet("{id}/ Donor History")]
         public async Task<IActionResult> GetDonorHistory(int id)
         {

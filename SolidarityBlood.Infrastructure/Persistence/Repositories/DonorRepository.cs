@@ -51,6 +51,12 @@ namespace SolidarityBlood.Infrastructure.Persistence.Repositories
             return donor;
         }
 
+        public async Task<List<Donor>> GetDeletedDonor()
+        {
+            var list = await _dbcontext.Donor.ToListAsync();
+
+            return list;
+        }
         
         public async Task<List<Donation>> GetDonorHistory(int id)
         {

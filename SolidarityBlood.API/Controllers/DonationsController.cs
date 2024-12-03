@@ -21,7 +21,7 @@ namespace SolidarityBlood.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("/Create Donation")]
+        [HttpPost("Create Donation")]
         public async Task<IActionResult> Create(CreateDonationCommand command)
         {
             try
@@ -39,7 +39,7 @@ namespace SolidarityBlood.API.Controllers
         }
 
 
-        [HttpGet("/Consult Donations")]
+        [HttpGet("Consult Donations")]
         public async Task<IActionResult> GetAll()
         {
             var get = new GetAllDonationsQuerie();
@@ -49,6 +49,16 @@ namespace SolidarityBlood.API.Controllers
             return Ok(donations);
         }
 
+        [HttpGet("Consult Deleted Donations")]
+        public async Task<IActionResult> GetDeletedDonations()
+        {
+            var get = new GetDeletedDonationsQuerie();
+
+            var command = await _mediator.Send(get);
+
+            return Ok(command);
+            
+        }
 
         //  api/donations/1
         [HttpGet("{id}/Donation")]

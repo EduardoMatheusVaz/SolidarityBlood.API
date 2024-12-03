@@ -22,9 +22,8 @@ namespace SolidarityBlood.Application.Commands.BloodStocks
         public async Task<bool> Handle(BloodStockCheckCommand request, CancellationToken cancellationToken)
         {
             var quantitysMl = await _dbContext.Donation.Select(qm => qm.QuantityMl).ToListAsync();
-            var minimunQuantity = quantitysMl.Sum();
 
-            return minimunQuantity >= request.MinimumQuantityMl;
+            return quantitysMl.Sum() >= request.MinimumQuantityMl;
 
         }
     }

@@ -12,6 +12,7 @@ namespace SolidarityBlood.Core.Repositories
         Task<int> CreateBloodStock(BloodStock bloodStock);
         Task<List<BloodStock>> GetAllBloodStocks();
         Task<BloodStock> GeByIdBloodStock(int id);
+        Task<int> GetTotalBlood();
         Task Update(int id, BloodStock bloodStock);
         Task Delete(int id, string reasonUnavailable);
     }
