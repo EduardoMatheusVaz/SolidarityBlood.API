@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SolidarityBlood.Application.Commands.BloodStocks
 {
-    public class BloodStockCheckCommand : IRequest<bool>
+    public class BloodStockCheckCommand : IRequest<Unit>
     {
         public int MinimumQuantityMl { get; } = 10000;
         public int CurrentTotalQuantityMl { get; set; }

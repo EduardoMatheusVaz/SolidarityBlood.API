@@ -12,6 +12,7 @@ using SolidarityBlood.Infrastructure.Integration.Refit;
 using SolidarityBlood.Infrastructure.Integration.Interfaces;
 using SolidarityBlood.Infrastructure.Integration;
 using SolidarityBlood.API.Services;
+using SolidarityBlood.Application.DTOs.Email;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +38,8 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true; 
 });
+
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SMTP"));
 
 builder.Services.AddHostedService<StockCheckHostedService>();
 
