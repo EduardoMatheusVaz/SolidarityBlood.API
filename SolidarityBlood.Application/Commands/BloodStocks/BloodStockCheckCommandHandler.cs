@@ -63,7 +63,7 @@ namespace SolidarityBlood.Application.Commands.BloodStocks
                         {
                             await client.ConnectAsync(_appsettings.Value.Host, _appsettings.Value.Porta, MailKit.Security.SecureSocketOptions.StartTlsWhenAvailable);
                             client.AuthenticationMechanisms.Remove("XOAUTH2");
-                            client.Authenticate(_appsettings.Value.UserName, "sua senha de verificação de duas etapas");
+                            client.Authenticate(_appsettings.Value.UserName, "sua senha");
 
                             await client.SendAsync(message);
                             client.Disconnect(true);

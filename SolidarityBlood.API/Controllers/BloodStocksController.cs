@@ -10,7 +10,7 @@ namespace SolidarityBlood.API.Controllers
 {
     [ApiController]
     [Route("api/bloodstocks")]
-    public class BloodStocksController : Controller
+    public class BloodStocksController : ControllerBase
     {
         private readonly IMediator _mediator;
 

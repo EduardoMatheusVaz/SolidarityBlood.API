@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidarityBlood.Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidarityBlood.Application", "SolidarityBlood.Application\SolidarityBlood.Application.csproj", "{C737DCA8-DE6D-418C-AE88-9CDD342B2D19}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidarityBlood.UnitTests", "SolidarityBlood.UnitTests\SolidarityBlood.UnitTests.csproj", "{8DD60F1E-7150-4A21-944E-9BF408244471}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C737DCA8-DE6D-418C-AE88-9CDD342B2D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C737DCA8-DE6D-418C-AE88-9CDD342B2D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C737DCA8-DE6D-418C-AE88-9CDD342B2D19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DD60F1E-7150-4A21-944E-9BF408244471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DD60F1E-7150-4A21-944E-9BF408244471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DD60F1E-7150-4A21-944E-9BF408244471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DD60F1E-7150-4A21-944E-9BF408244471}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

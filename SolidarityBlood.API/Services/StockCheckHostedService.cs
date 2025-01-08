@@ -51,7 +51,7 @@ namespace SolidarityBlood.API.Services
 
                 var command = new BloodStockCheckCommand();
 
-                await mediatrLife.Send(command);
+                await mediatrLife.Send(command); 
             }
 
             //var command = new BloodStockCheckCommand();

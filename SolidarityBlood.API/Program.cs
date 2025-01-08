@@ -48,11 +48,14 @@ builder.Services.AddScoped<IDonationRepository, DonationRepository>();
 builder.Services.AddScoped<IBloodStockRepository, BloodStockRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IViaCepIntegration, ViaCepIntegration>();
+builder.Services.AddScoped<IReportRepository, ReportRepository>();
 
 builder.Services.AddRefitClient<IViaCepIntegrationRefit>().ConfigureHttpClient(c =>
 {
     c.BaseAddress = new Uri("https://viacep.com.br/");
 });
+
+Environment.SetEnvironmentVariable("ITEXT_BOUNCY_CASTLE_FACTORY_NAME", "bouncy-castle");
 
 var app = builder.Build();
 
