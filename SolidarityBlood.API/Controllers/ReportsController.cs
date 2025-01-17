@@ -29,17 +29,14 @@ namespace SolidarityBlood.API.Controllers
 
 
 
-        [HttpPost("Report Total Blood")]
+        [HttpPost("Report Total Blood by Type")]
         public async Task<IActionResult> TotalBlood()
         {
+            var get = new ReportStockCheckCommand();
+
+            var report = await _mediator.Send(get);
             
-            
-            return Ok();
-        
-        
+            return Ok(report);
         }
-
-
-
     }
 }

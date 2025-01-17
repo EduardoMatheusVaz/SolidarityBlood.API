@@ -48,6 +48,9 @@ namespace SolidarityBlood.Application.Commands.Reports
 
             // Cria um documento a partir do PdfDocument na memória
             Document document = new Document(pdf);
+            
+            // adicionada essas margens no documento e assim foi possível colocar a tabela mais centralizada, sem deixar para mais um lado que o outro
+            document.SetMargins(20, 20, 20, 20);
 
             // Cria um parágrafo mas no meu caso estou usando mais para criar um título
             Paragraph header = new Paragraph("Doações dos últimos 30 dias")
@@ -63,68 +66,68 @@ namespace SolidarityBlood.Application.Commands.Reports
 
             // Criando a tabela
             Table tabela = new Table(10, false);
-
+            tabela.SetHorizontalAlignment(HorizontalAlignment.LEFT);
 
             // COLUNAS
             Cell cell1 = new Cell(1, 1)
                 .SetBackgroundColor(ColorConstants.GRAY)
                 .SetTextAlignment(TextAlignment.CENTER)
                 .Add(new Paragraph("Id Doação"))
-                .SetFontSize(11);
+                .SetFontSize(9);
 
             Cell cell2 = new Cell(1, 1)
                 .SetBackgroundColor(ColorConstants.GRAY)
                 .SetTextAlignment(TextAlignment.CENTER)
                 .Add(new Paragraph("Data Doação"))
-                .SetFontSize(11);
+                .SetFontSize(9);
 
             Cell cell3 = new Cell(1, 1)
                 .SetBackgroundColor(ColorConstants.GRAY)
                 .SetTextAlignment(TextAlignment.CENTER)
                 .Add(new Paragraph("Quantidade ML"))
-                .SetFontSize(11);
+                .SetFontSize(9);
 
             Cell cell4 = new Cell(1, 1)
                 .SetBackgroundColor(ColorConstants.GRAY)
                 .SetTextAlignment(TextAlignment.CENTER)
                 .Add(new Paragraph("Status"))
-                .SetFontSize(11);
+                .SetFontSize(9);
 
             Cell cell5 = new Cell(1, 1)
                 .SetBackgroundColor(ColorConstants.GRAY)
                 .SetTextAlignment(TextAlignment.CENTER)
                 .Add(new Paragraph("Id Doador"))
-                .SetFontSize(11);
+                .SetFontSize(9);
 
             Cell cell6 = new Cell(1, 1)
                 .SetBackgroundColor(ColorConstants.GRAY)
                 .SetTextAlignment(TextAlignment.CENTER)
                 .Add(new Paragraph("Nome"))
-                .SetFontSize(11);
+                .SetFontSize(9);
 
             Cell cell7 = new Cell(1, 1)
                 .SetBackgroundColor(ColorConstants.GRAY)
                 .SetTextAlignment(TextAlignment.CENTER)
                 .Add(new Paragraph("Email"))
-                .SetFontSize(11);
+                .SetFontSize(9);
 
             Cell cell8 = new Cell(1, 1)
                 .SetBackgroundColor(ColorConstants.GRAY)
                 .SetTextAlignment(TextAlignment.CENTER)
                 .Add(new Paragraph("Gênero"))
-                .SetFontSize(11);
+                .SetFontSize(9);
 
             Cell cell9 = new Cell(1, 1)
                 .SetBackgroundColor(ColorConstants.GRAY)
                 .SetTextAlignment(TextAlignment.CENTER)
                 .Add(new Paragraph("Tipo Sanguíneo"))
-                .SetFontSize(11);
+                .SetFontSize(9);
 
             Cell cell10 = new Cell(1, 1)
                 .SetBackgroundColor(ColorConstants.GRAY)
                 .SetTextAlignment(TextAlignment.CENTER)
                 .Add(new Paragraph("Fator RH"))
-                .SetFontSize(11);
+                .SetFontSize(9);
 
             // Adicionando as colunas
             tabela.AddCell(cell1);
@@ -142,16 +145,16 @@ namespace SolidarityBlood.Application.Commands.Reports
             // Adicionando os dados nas respectivas colunas
             foreach (var f in get)
             {
-                tabela.AddCell(new Cell().Add(new Paragraph(f.DonationId.ToString()))).SetFontSize(9);
+                tabela.AddCell(new Cell().Add(new Paragraph(f.Id.ToString()))).SetFontSize(9);
                 tabela.AddCell(new Cell().Add(new Paragraph(f.DateDonation.ToString("dd/MM/yyyy")))).SetFontSize(9);
                 tabela.AddCell(new Cell().Add(new Paragraph(f.QuantityMl.ToString()))).SetFontSize(9);
                 tabela.AddCell(new Cell().Add(new Paragraph(f.Status.ToString()))).SetFontSize(9);
-                tabela.AddCell(new Cell().Add(new Paragraph(f.DonorId.ToString()))).SetFontSize(9);
+                tabela.AddCell(new Cell().Add(new Paragraph(f.DonorId.ToString()))).SetFontSize(9).SetTextAlignment(TextAlignment.CENTER);
                 tabela.AddCell(new Cell().Add(new Paragraph(f.FullName.ToString()))).SetFontSize(9);
                 tabela.AddCell(new Cell().Add(new Paragraph(f.Email.ToString()))).SetFontSize(11);
                 tabela.AddCell(new Cell().Add(new Paragraph(f.Gender.ToString()))).SetFontSize(9);
-                tabela.AddCell(new Cell().Add(new Paragraph(f.BloodTypes.ToString()))).SetFontSize(9);
-                tabela.AddCell(new Cell().Add(new Paragraph(f.RHFactor.ToString()))).SetFontSize(9);
+                tabela.AddCell(new Cell().Add(new Paragraph(f.BloodTypes.ToString()))).SetFontSize(9).SetTextAlignment(TextAlignment.CENTER);
+                tabela.AddCell(new Cell().Add(new Paragraph(f.RHFactor.ToString()))).SetFontSize(9).SetTextAlignment(TextAlignment.CENTER);
             }
 
 

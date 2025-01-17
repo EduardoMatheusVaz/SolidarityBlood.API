@@ -18,6 +18,11 @@ namespace SolidarityBlood.Core.Entities
             Status = BloodStockStatusEnum.Available;
         }
 
+        public BloodStock()
+        {
+            
+        }
+
         public string BloodType { get; private set; }
         public string RHFactor { get; private set; }
         public int? QuantityMl { get; private set; }

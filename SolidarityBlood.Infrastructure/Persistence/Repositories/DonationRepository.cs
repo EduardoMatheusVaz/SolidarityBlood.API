@@ -25,6 +25,9 @@ namespace SolidarityBlood.Infrastructure.Persistence.Repositories
             await _dbcontext.Donation.AddAsync(newDonation);
             await _dbcontext.SaveChangesAsync();
 
+            // vai executar a procedure diretamente no banco de dados, vai atualizar o estoque e nao vai dar o erro do OUTPUT
+            await _dbcontext.Database.ExecuteSqlRawAsync("EXEC UpdateBloodStock");
+
             return newDonation.Id;
         }
 

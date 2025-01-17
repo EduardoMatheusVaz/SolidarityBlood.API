@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using SolidarityBlood.Core.DTOs.Report;
+using SolidarityBlood.Core.Entities;
 using SolidarityBlood.Core.Repositories;
 using System;
 using System.Collections.Generic;
@@ -37,9 +38,27 @@ namespace SolidarityBlood.Infrastructure.Persistence.Repositories
                 var get = await sqlConnection.QueryAsync<ReportDonationDTO>(script);
 
                 return get.ToList();
+            } 
+        }
+
+
+        public async Task<List<BloodStock>> ReportStockCheck()
+        {
+
+            using (var sqlConnection = new SqlConnection(_connectionString))
+            {
+                sqlConnection.Open();
+
+                var script = @"SELECT Id, BloodType, RHFactor, QuantityMl, Status FROM tb_BloodStock";
+
+                var get = await sqlConnection.QueryAsync<BloodStock>(script);
+
+                return get.ToList();
             }
 
- 
+
         }
+
+
     }
 }

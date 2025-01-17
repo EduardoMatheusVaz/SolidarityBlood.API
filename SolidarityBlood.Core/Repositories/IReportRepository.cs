@@ -1,4 +1,5 @@
 ﻿using SolidarityBlood.Core.DTOs.Report;
+using SolidarityBlood.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace SolidarityBlood.Core.Repositories
     {
 
         Task<List<ReportDonationDTO>> ReportLastDonation();
-        
+        Task<List<BloodStock>> ReportStockCheck();
 
     }
 }

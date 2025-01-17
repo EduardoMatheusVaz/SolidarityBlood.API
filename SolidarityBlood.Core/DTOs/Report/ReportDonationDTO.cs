@@ -11,7 +11,7 @@ namespace SolidarityBlood.Core.DTOs.Report
     {
 
         // Donation
-        public int DonationId { get; set; }
+        public int Id { get; set; }
         public DateTime DateDonation { get; set; }
         public int QuantityMl { get; set; }
         public DonationStatusEnum Status { get; set; }

@@ -51,7 +51,7 @@ namespace SolidarityBlood.API.Controllers
 
 
         //  api/donors/1
-        [HttpGet("{id}/ Donor")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var get = new GetByIdDonorQuerie(id);
