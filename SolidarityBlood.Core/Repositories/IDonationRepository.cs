@@ -15,5 +15,6 @@ namespace SolidarityBlood.Core.Repositories
         Task<List<Donation>> GetDeletedDonations();
         Task Update(int id, Donation donation);
         Task Delete(int id, string canceled);
+        Task TimeLimitForDonation(int id);
     }
 }

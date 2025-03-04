@@ -13,19 +13,18 @@ namespace SolidarityBlood.Application.Commands.Addresses
     public class CreateAddressCommandHandler : IRequestHandler<CreateAddressCommand, int>
     {
         private readonly IAddressRepository _addressRepository;
-        private readonly IViaCepIntegration _viaCepIntegration;
 
-        public CreateAddressCommandHandler(IAddressRepository addressRepository, IViaCepIntegration viaCepIntegration)
+        public CreateAddressCommandHandler(IAddressRepository addressRepository)
         {
             _addressRepository = addressRepository;
-            _viaCepIntegration = viaCepIntegration;
         }
 
         public async Task<int> Handle(CreateAddressCommand request, CancellationToken cancellationToken)
         {
-            
-            var responseViaCep = await _viaCepIntegration.GetDataViaCep(request.ZipCode);
-            var address = new Address(responseViaCep.Logradouro, responseViaCep.Complemento, responseViaCep.Bairro, responseViaCep.Localidade, responseViaCep.Uf, responseViaCep.Cep);
+            //var responseViaCep = await _viaCepIntegration.GetDataViaCep(request.ZipCode);
+            var responseViaCep = await _addressRepository.AddresQuery(request.ZipCode);
+
+            var address = new Address(responseViaCep.PublicPlace, responseViaCep.Complement, responseViaCep.Neighborhood, responseViaCep.City, responseViaCep.State, responseViaCep.ZipCode);
 
             await _addressRepository.CreateAddress(address);
 

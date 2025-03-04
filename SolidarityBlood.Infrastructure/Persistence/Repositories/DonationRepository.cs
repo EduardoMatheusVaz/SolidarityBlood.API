@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure.Core;
+using Microsoft.EntityFrameworkCore;
 using SolidarityBlood.Core.Entities;
 using SolidarityBlood.Core.Repositories;
 using System;
@@ -59,6 +60,25 @@ namespace SolidarityBlood.Infrastructure.Persistence.Repositories
             var list = await _dbcontext.Donation.ToListAsync();
 
             return list;
+        }
+
+        public async Task TimeLimitForDonation(int id)
+        {
+
+            // 1- buscar o donor no banco de dados
+            // 2- buscar a ultima doação do doador
+            // 3- chamar o método que criei dentro da entidade Donor, se pode ou nao fazer a doação
+            // 4- caso o return seja false lançar uma exceção, o céu é o limite
+
+            // 1- buscar o donor no banco de dados
+            var donor = await _dbcontext.Donor.FirstOrDefaultAsync(d => d.Id == id);
+
+            // 2- buscar a ultima doação do doador
+            var lastDonation = _dbcontext.Donation.Where(d => d.DonorId == donor.Id).
+                OrderByDescending(d => d.DateDonation).
+                Select(d => d.DateDonation).
+                FirstOrDefault();
+
         }
 
         public async Task Update(int id, Donation donation)

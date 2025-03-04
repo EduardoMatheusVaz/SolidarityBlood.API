@@ -15,5 +15,6 @@ namespace SolidarityBlood.Core.Repositories
         Task<List<Address>> GetDeletedAddress();
         Task UpdateAddress(int id, Address address);
         Task Delete(int id, string reasonExclusion);
+        Task<Address> AddresQuery(string zipcode);
     }
 }

@@ -16,5 +16,6 @@ namespace SolidarityBlood.Core.Repositories
         Task<List<Donation>> GetDonorHistory(int id);
         Task Update(int id, Donor donor);
         Task Delete(int id, string reasonExclusion);
+        Task<bool> VerifyEmail(string email);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure.Core;
+using Microsoft.EntityFrameworkCore;
 using SolidarityBlood.Core.Entities;
 using SolidarityBlood.Core.Repositories;
 using System;
@@ -77,6 +78,12 @@ namespace SolidarityBlood.Infrastructure.Persistence.Repositories
             diskdonor.Update(donor.FullName, donor.Email, donor.DateBirth, donor.Gender, donor.Weight, donor.BloodTypes, donor.RHFactor, donor.AddressId);
 
             await _dbcontext.SaveChangesAsync();
+        }
+
+        public async Task<bool> VerifyEmail(string email)
+        {
+            return await _dbcontext.Donor.AnyAsync(d => d.Email.Equals(email));
+
         }
     }
 }

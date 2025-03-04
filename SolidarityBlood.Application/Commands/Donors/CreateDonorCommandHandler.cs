@@ -15,12 +15,10 @@ namespace SolidarityBlood.Application.Commands.Donors
     public class CreateDonorCommandHandler : IRequestHandler<CreateDonorCommand, int>
     {
         private readonly IDonorRepository _donorRepository;
-        private readonly SolidarityBloodDbContext _dbContext;
 
-        public CreateDonorCommandHandler(IDonorRepository donorRepository, SolidarityBloodDbContext dbContext)
+        public CreateDonorCommandHandler(IDonorRepository donorRepository)
         {
             _donorRepository = donorRepository;
-            _dbContext = dbContext;
         }
 
         public async Task<int> Handle(CreateDonorCommand request, CancellationToken cancellationToken)
@@ -32,11 +30,10 @@ namespace SolidarityBlood.Application.Commands.Donors
 
             var newDonor = new Donor(request.FullName, request.Email, request.DateBirth, request.Gender, request.Weight, request.BloodTypes, request.RHFactor, request.AddressId);
 
-            if (await _dbContext.Donor.AnyAsync(d => d.Email.Equals(request.Email)))
+            if (await _donorRepository.VerifyEmail(request.Email))
             {
                 throw new InvalidOperationException("Email informado já está em uso!");
             }
-            
 
             await _donorRepository.CreateDonor(newDonor);
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SolidarityBlood.Application.Queries.Donation
 {
-    internal class GetAllDonationsQuerieHandler : IRequestHandler<GetAllDonationsQuerie, List<GetAllDonationDTO>>
+    public class GetAllDonationsQuerieHandler : IRequestHandler<GetAllDonationsQuerie, List<GetAllDonationDTO>>
     {
         private readonly IDonationRepository _donationRepository;
 

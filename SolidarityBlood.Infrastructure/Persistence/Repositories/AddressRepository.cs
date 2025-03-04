@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure.Core;
+using Microsoft.EntityFrameworkCore;
 using SolidarityBlood.Core.Entities;
 using SolidarityBlood.Core.Repositories;
+using SolidarityBlood.Infrastructure.Integration.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +14,21 @@ namespace SolidarityBlood.Infrastructure.Persistence.Repositories
     public class AddressRepository : IAddressRepository
     {
         private readonly SolidarityBloodDbContext _dbcontext;
+        private readonly IViaCepIntegration _viaCepIntegration;
 
-        public AddressRepository(SolidarityBloodDbContext dbcontext)
+        public AddressRepository(SolidarityBloodDbContext dbcontext, IViaCepIntegration viaCepIntegration)
         {
             _dbcontext = dbcontext;
+            _viaCepIntegration = viaCepIntegration;
+        }
+
+        public async Task<Address> AddresQuery(string zipcode)
+        {
+            var responseViaCep = await _viaCepIntegration.GetDataViaCep(zipcode);
+            var address = new Address(responseViaCep.Logradouro, responseViaCep.Complemento, responseViaCep.Bairro, responseViaCep.Localidade, responseViaCep.Uf, responseViaCep.Cep);
+
+            return address;
+
         }
 
         public async Task<int> CreateAddress(Address address)
