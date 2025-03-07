@@ -61,7 +61,6 @@ namespace SolidarityBlood.Core.Entities
 
         // METHODS
 
-
         public bool ValidateWeight()
         {
             if (Weight >= 50)

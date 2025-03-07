@@ -47,7 +47,9 @@ namespace SolidarityBlood.UnitTests.Application.Commands.Donors
 
 
             // Assert
+            // Eu quero verificar que o createDonor para QUALQUER doador foi chamado pelo menos uma vez!!
             donorRepository.Verify(pr => pr.CreateDonor(It.IsAny<Donor>()), Times.Once);
+
         }
 
 
@@ -62,8 +64,8 @@ namespace SolidarityBlood.UnitTests.Application.Commands.Donors
 
             var command = new CreateDonorCommand
             {
-                FullName = "Peniano",
-                Email = "penipeniano@gmail.com",
+                FullName = "Gremio",
+                Email = "Pepo@gmail.com",
                 DateBirth = dateBirth,
                 Gender = "Masculino",
                 Weight = 80,

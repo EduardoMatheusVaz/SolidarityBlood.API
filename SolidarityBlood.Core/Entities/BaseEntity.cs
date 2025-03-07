@@ -14,6 +14,5 @@ namespace SolidarityBlood.Core.Entities
         }
 
         public int Id { get; private set; }
-
     }
 }

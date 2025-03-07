@@ -31,4 +31,4 @@ namespace SolidarityBlood.Application.Commands.Addresses
             return address.Id;
         }
     }
-}
+}  
