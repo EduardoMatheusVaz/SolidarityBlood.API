@@ -40,7 +40,7 @@ namespace SolidarityBlood.UnitTests.Application.Commands.Donors
             var donorRepository = new Mock<IDonorRepository>();
             donorRepository.Setup(pr => pr.VerifyEmail(It.IsAny<string>())).ReturnsAsync(false);
             var commandHandler = new CreateDonorCommandHandler(donorRepository.Object);
-
+ 
 
             // ACT: é a ação em si, a faze em que nos 
             var id = await commandHandler.Handle(command, new CancellationToken());
