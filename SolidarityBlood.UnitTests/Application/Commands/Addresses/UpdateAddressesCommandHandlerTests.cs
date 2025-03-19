@@ -49,23 +49,89 @@ namespace SolidarityBlood.UnitTests.Application.Commands.Addresses
             // ASSERTS => são as validações que queremos averiguar com os nossos testes né
 
             addressRepository.Verify(pr => pr.UpdateAddress(It.IsAny<int>(), It.IsAny<Address>()), Times.Once());
-            //addressRepository.Verify(pr => pr.UpdateAddress(
-            //    It.Is<int>(id => id == 1),
-            //    It.Is<Address>(a =>
-            //    a.Id == command.Id &&
-            //    a.PublicPlace == command.PublicPlace &&
-            //    a.Complement == command.Complement &&
-            //    a.Neighborhood == command.Neighborhood &&
-            //    a.City == command.City &&
-            //    a.State == command.State &&
-            //    a.ZipCode == command.ZipCode)
-            //    ), Times.Once());
+        }
 
+
+        [Fact] // indica que o método a seguir se trata de um caso de teste unitário, ou em outras palavras de um teste de unidade
+        public async Task If_DataIsWrong_ThenTheReturn_ShouldBeFalse()
+        {
+            // ARRANGE => etapa de preparação do ambiente
+
+            Address addressUpdate = null;
+
+            var command = new UpdateAddressCommand
+            {
+                Id = 1,
+                PublicPlace = "Rua Senador Pinheiro",
+                Complement = "112",
+                Neighborhood = "Vila Rodrigues",
+                City = "Passo Fundo",
+                State = "RS",
+                ZipCode = "99070-220"
+            };
+
+            var addressRepository = new Mock<IAddressRepository>();
+            addressRepository
+                .Setup(rep => rep.UpdateAddress(It.IsAny<int>(), It.IsAny<Address>()))
+                .Callback<int, Address>((id, address) => addressUpdate = address)
+                .Returns(Task.CompletedTask);
+
+            var commandHandler = new UpdateAddressCommandHandler(addressRepository.Object);
+
+            // ACT
+            var act = await commandHandler.Handle(command, new CancellationToken());
+
+
+            // ASSERT => etapa das validações em si
+            Assert.False(addressUpdate.PublicPlace == "Gremio");
+            Assert.False(addressUpdate.Complement == "Pepo");
+            Assert.False(addressUpdate.Neighborhood == "Caie Paulista");
+            Assert.False(addressUpdate.City == "Rochel");
+            Assert.False(addressUpdate.State == "BALNEARIO CAMBORIU");
+            Assert.False(addressUpdate.ZipCode == "99211-285");
         }
 
 
 
 
+        [Fact] // indica que o método a seguir se trata de um caso de teste unitário, ou em outras palavras de um teste de unidade
+        public async Task If_DataIsCorrect_SoThenTheReturn_ShouldBeTrue_OnThisShit()
+        {
+            // ARRANGE => etapa de preparação do ambiente
+
+            Address addressUpdate = null;
+
+            var command = new UpdateAddressCommand
+            {
+                Id = 1,
+                PublicPlace = "Rua Senador Pinheiro",
+                Complement = "112",
+                Neighborhood = "Vila Rodrigues",
+                City = "Passo Fundo",
+                State = "RS",
+                ZipCode = "99070-220"
+            };
+
+            var addressRepository = new Mock<IAddressRepository>();
+            addressRepository
+                .Setup(rep => rep.UpdateAddress(It.IsAny<int>(), It.IsAny<Address>()))
+                .Callback<int, Address>((id, address) => addressUpdate = address)
+                .Returns(Task.CompletedTask);
+
+            var commandHandler = new UpdateAddressCommandHandler(addressRepository.Object);
+
+            // ACT
+            var act = await commandHandler.Handle(command, new CancellationToken());
+
+
+            // ASSERT => etapa das validações em si
+            Assert.True(addressUpdate.PublicPlace == "Rua Senador Pinheiro");
+            Assert.True(addressUpdate.Complement == "112");
+            Assert.True(addressUpdate.Neighborhood == "Vila Rodrigues");
+            Assert.True(addressUpdate.City == "Passo Fundo");
+            Assert.True(addressUpdate.State == "RS");
+            Assert.True(addressUpdate.ZipCode == "99070-220");
+        }
 
     }
 }
